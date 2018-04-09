@@ -1,0 +1,44 @@
+language: python
+sudo: false
+cache:
+  apt: true
+  directories:
+    - $HOME/.cache/pip
+
+python:
+  - "2.7"
+
+addons:
+  apt:
+    packages:
+      - expect-dev  # provides unbuffer utility
+      - python-lxml  # because pip installation is slow
+      - python-simplejson
+      - python-serial
+      - python-yaml
+
+env:
+  global:
+  - VERSION="10.0" TESTS="0" LINT_CHECK="0" TRANSIFEX="0"
+  - TRANSIFEX_USER='transbot@odoo-community.org'
+  - secure: "hDbJuI6FooiklleAkY1kkxHF6Lkr/GFxD6Kplxmpz7Uzf6FjdEmtWJOwmasQMnsmvUEmP/LGCSFTTatBQ8Tl0oxuA/3Oplz80JlG9K/E8g2EsTHBPZLiQJuPxSS1LoWx+Fz2OdyLZNZkorvxcw7siqIwZ5RyfFlr1cBViXqnKZnIcuyq54n7tzGeOq908ED9Q/9XYOKfsDWrv3QgBzXLE+KlkymI8dcjISnOZaFjmtAzWzJLvgQVv5bDJ4QaEZug1Qpda70ewsXFp/+lf8guMeh0pOhmS3n51c8dxsXASFV9wgUvxR9tlbs6tuf5RJnBFctM3mb8J8pcjUCyq5gDAEWDn4jPn8S9y+K5gZxz6mmx4XE2GFD45TvTwySIzyyEQkf2T+TQR7A35JWvZ7n2t6jNIHe2Q3QFFTJ5l2F3FdBzR2T9dHOo22+up5VKX9q8EeVZ4Sc1CWOCRx+OI/YSr47yJhPpTUVjJvsjSKIaw2DCo8B49X27MYvaIdWUEKUeO+hLReXFiWxyGpSv1HpQIMu5SvFLZAbeOJ//HEtkKEgRKVQRgPNOwxtwcBR/y2ay8++H7BoPEHyM0TI69KGhJlaogwIhtg+paitZIFPQo+Mq5yKKjFDTDlhyZd5l8+tGbwA0rYd+mWbUNs/Teoke+U9ShkDngfAV8a0hvgbGaeo="
+
+  matrix:
+  - LINT_CHECK="1"
+  - TRANSIFEX="1"
+  - TESTS="1" ODOO_REPO="odoo/odoo"
+  - TESTS="1" ODOO_REPO="OCA/OCB"
+
+virtualenv:
+  system_site_packages: true
+
+install:
+  - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
+  - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
+  - travis_install_nightly
+
+script:
+  - travis_run_tests
+
+after_success:
+  - travis_after_tests_success
