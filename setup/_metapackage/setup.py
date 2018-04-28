@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo10-addon-l10n_hr_bank',
+        'odoo10-addon-l10n_hr_base_location',
     ],
     classifiers=[
         'Programming Language :: Python',
