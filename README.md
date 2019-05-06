@@ -1,6 +1,6 @@
-[![Runbot Status](https://runbot.odoo-community.org/runbot/badge/flat/261/12.0.svg)](https://runbot.odoo-community.org/runbot/repo/github-com-oca-l10n-croatia-261)
-[![Build Status](https://travis-ci.org/OCA/l10n-croatia.svg?branch=12.0)](https://travis-ci.org/OCA/l10n-croatia)
-[![codecov](https://codecov.io/gh/OCA/l10n-croatia/branch/12.0/graph/badge.svg)](https://codecov.io/gh/OCA/l10n-croatia)
+[![Runbot Status](https://runbot.odoo-community.org/runbot/badge/flat/261/10.0.svg)](https://runbot.odoo-community.org/runbot/repo/github-com-oca-l10n-croatia-261)
+[![Build Status](https://travis-ci.org/OCA/l10n-croatia.svg?branch=10.0)](https://travis-ci.org/OCA/l10n-croatia)
+[![codecov](https://codecov.io/gh/OCA/l10n-croatia/branch/10.0/graph/badge.svg)](https://codecov.io/gh/OCA/l10n-croatia)
 
 Odoo Croatian Localization
 ==========================
