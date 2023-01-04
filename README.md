@@ -17,7 +17,15 @@ TODO: add repo description.
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[currency_rate_update_hr_hnb](currency_rate_update_hr_hnb/) | 16.0.1.0.0 |  | Update exchange rates using Croatia HNB
+[l10n_hr_bank](l10n_hr_bank/) | 16.0.1.0.0 |  | Croatia Banking localization
+[l10n_hr_base](l10n_hr_base/) | 16.0.1.0.0 |  | Croatia base localization data
+[l10n_hr_city](l10n_hr_city/) | 16.0.1.0.0 |  | Adds location data for Croatia - Cities, post offices etc.
+[l10n_hr_nkd](l10n_hr_nkd/) | 16.0.1.0.0 |  | Hrvatska - Nacionalna Klasifikacija Djelatnosti
 
 [//]: # (end addons)
 
