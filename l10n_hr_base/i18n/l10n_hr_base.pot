@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-04 08:55+0000\n"
-"PO-Revision-Date: 2023-01-04 08:55+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -21,18 +19,18 @@ msgid "Abstract class for handling XML in Croatia"
 msgstr ""
 
 #. module: l10n_hr_base
-#: model:ir.model.fields,help:l10n_hr_base.field_res_company__l10n_hr_zdravstveno
-msgid "Registration number for payments to health insurance"
-msgstr ""
-
-#. module: l10n_hr_base
-#: model:ir.model.fields,help:l10n_hr_base.field_res_company__l10n_hr_mirovinsko
-msgid "Regstration Number for payments in pension fund"
-msgstr ""
-
-#. module: l10n_hr_base
 #: model:ir.model,name:l10n_hr_base.model_res_company
 msgid "Companies"
+msgstr ""
+
+#. module: l10n_hr_base
+#: model:ir.model,name:l10n_hr_base.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: l10n_hr_base
+#: model:ir.model.fields,field_description:l10n_hr_base.field_res_company__l10n_hr_zdravstveno
+msgid "Health insurance"
 msgstr ""
 
 #. module: l10n_hr_base
@@ -41,18 +39,18 @@ msgid "Legal data"
 msgstr ""
 
 #. module: l10n_hr_base
-#: model:ir.model.fields,field_description:l10n_hr_base.field_res_company__l10n_hr_maticni_broj
-msgid "Registration number"
-msgstr ""
-
-#. module: l10n_hr_base
-#: model:ir.model.fields,field_description:l10n_hr_base.field_res_company__l10n_hr_mirovinsko
-msgid "Pension fund"
+#: model:ir.model.fields,help:l10n_hr_base.field_res_company__l10n_hr_nkd
+msgid "Main company activity classified by NKD-2007"
 msgstr ""
 
 #. module: l10n_hr_base
 #: model:ir.model.fields,field_description:l10n_hr_base.field_res_company__l10n_hr_nkd
 msgid "NKD"
+msgstr ""
+
+#. module: l10n_hr_base
+#: model:ir.model.fields,field_description:l10n_hr_base.field_res_company__l10n_hr_mirovinsko
+msgid "Pension fund"
 msgstr ""
 
 #. module: l10n_hr_base
@@ -63,11 +61,16 @@ msgid "Phone %s not valid!"
 msgstr ""
 
 #. module: l10n_hr_base
-#: model:ir.model.fields,field_description:l10n_hr_base.field_res_company__l10n_hr_zdravstveno
-msgid "Health insurance"
+#: model:ir.model.fields,field_description:l10n_hr_base.field_res_company__l10n_hr_maticni_broj
+msgid "Registration number"
 msgstr ""
 
 #. module: l10n_hr_base
-#: model:ir.model.fields,help:l10n_hr_base.field_res_company__l10n_hr_nkd
-msgid "Main company activity classified by NKD-2007"
+#: model:ir.model.fields,help:l10n_hr_base.field_res_company__l10n_hr_zdravstveno
+msgid "Registration number for payments to health insurance"
+msgstr ""
+
+#. module: l10n_hr_base
+#: model:ir.model.fields,help:l10n_hr_base.field_res_company__l10n_hr_mirovinsko
+msgid "Regstration Number for payments in pension fund"
 msgstr ""
