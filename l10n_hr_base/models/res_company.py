@@ -11,17 +11,17 @@ class Company(models.Model):
 
     l10n_hr_nkd = fields.Char(
         string="NKD",
-        help="Šifra glavne djelatnosti prema NKD-2007",
+        help="Main company activity classified by NKD-2007",
     )
     l10n_hr_mirovinsko = fields.Char(
-        string="Mirovinsko",
-        help="Broj obveznika uplaćivanja mirovinskog osiguranja",
+        string="Pension fund",
+        help="Regstration Number for payments in pension fund",
     )
     l10n_hr_zdravstveno = fields.Char(
-        string="Zdravstveno",
-        help="Broj obveze uplaćivanja zdravstvenog osiguranja",
+        string="Health insurance",
+        help="Registration number for payments to health insurance",
     )
-    l10n_hr_maticni_broj = fields.Char(string="Matični broj")
+    l10n_hr_maticni_broj = fields.Char(string="Registration number")
 
     def get_l10n_hr_time_formatted(self):
         # odoo16 - date/time) fields are WITH TZ info! diff from previous versions!
