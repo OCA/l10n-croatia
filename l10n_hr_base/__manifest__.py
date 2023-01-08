@@ -3,7 +3,7 @@
     "summary": """Croatia base localization data""",
     "category": "Croatia",
     "images": [],
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "application": False,
     "author": "DAJ MI 5, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/l10n-croatia",
