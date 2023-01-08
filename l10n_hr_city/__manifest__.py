@@ -3,7 +3,7 @@
     "summary": """Adds location data for Croatia - Cities, post offices etc.""",
     "category": "Croatia",
     "images": [],
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "application": False,
     "author": "Odoo Community Association (OCA)"
     ", Decodio Applications d.o.o."
