@@ -6,7 +6,7 @@
     "summary": "Croatia Banking localization",
     "category": "Croatia",
     "images": [],
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "application": False,
     "author": "Odoo Community Association (OCA), Davor Bojkić (DAJ MI 5)",
     "website": "https://github.com/OCA/l10n-croatia",
