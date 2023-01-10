@@ -1,0 +1,5 @@
+id,name,country_id/id
+tax_group_0,PDV 0%,base.hr
+tax_group_5,PDV 5%,base.hr
+tax_group_13,PDV 13%,base.hr
+tax_group_25,PDV 25%,base.hr

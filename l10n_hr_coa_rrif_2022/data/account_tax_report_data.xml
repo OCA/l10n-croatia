@@ -1,0 +1,1220 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+<record id="tax_report" model="account.report">
+    <field name="name">Tax Report</field>
+    <field name="root_report_id" ref="account.generic_tax_report" />
+    <field name="country_id" ref="base.hr" />
+    <field name="filter_fiscal_position" eval="True" />
+    <field name="availability_condition">country</field>
+    <field name="column_ids">
+        <record id="tax_report_tax_base" model="account.report.column">
+            <field name="name">Tax base</field>
+            <field name="expression_label">osn</field>
+        </record>
+        <record id="tax_report_tax_amount" model="account.report.column">
+            <field name="name">Tax amount</field>
+            <field name="expression_label">por</field>
+        </record>
+    </field>
+    <field name="line_ids">
+        <!-- Section I + II -->
+        <record id="tax_report_title_000" model="account.report.line">
+            <field
+                    name="name"
+                >Vat calculation of supplied goods and services - total value(I. + II.)</field>
+            <field name="code">000</field>
+            <field name="expression_ids">
+                <record id="tax_report_line_000_base" model="account.report.expression">
+                    <field name="label">osn</field>
+                    <field name="engine">aggregation</field>
+                    <field name="formula">100.osn + 200.osn</field>
+                </record>
+                <record id="tax_report_line_000_tax" model="account.report.expression">
+                    <field name="label">por</field>
+                    <field name="engine">aggregation</field>
+                    <field name="formula">200.por</field>
+                </record>
+            </field>
+        </record>
+        <!-- Section I -->
+        <record id="tax_report_title_100" model="account.report.line">
+            <field
+                    name="name"
+                >I. Transactions not subject to vat and exempt - total value (1.+2.+3.+4.+5.+6.+7.+8.+9.+10.+11.)</field>
+            <field name="code">100</field>
+            <field name="expression_ids">
+                <record id="tax_report_line_I_0_base" model="account.report.expression">
+                    <field name="label">osn</field>
+                    <field name="engine">aggregation</field>
+                    <field
+                            name="formula"
+                        >101.osn + 102.osn + 103.osn + 104.osn + 105.osn + 106.osn + 107.osn + 108.osn + 109.osn + 110.osn + 111.osn</field>
+                </record>
+            </field>
+            <field name="children_ids">
+                <!-- Sub Section 1 -->
+                <record id="tax_report_line_101" model="account.report.line">
+                    <field
+                            name="name"
+                        >1. Supplies in the republic of Croatia in respect of which the receiver calculates vat (domestic reverse charge)</field>
+                    <field name="code">101</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_101_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">I.1_base</field>
+                        </record>
+                    </field>
+                </record>
+                <!-- Sub Section 2 -->
+                <record id="tax_report_line_102" model="account.report.line">
+                    <field
+                            name="name"
+                        >2. Supplies carried out in another member state</field>
+                    <field name="code">102</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_102_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">I.2_base</field>
+                        </record>
+                    </field>
+                </record>
+                <!-- Sub Section 3 -->
+                <record id="tax_report_line_103" model="account.report.line">
+                    <field name="name">3. Supplies of goods within the eu</field>
+                    <field name="code">103</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_103_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">I.3_base</field>
+                        </record>
+                    </field>
+                </record>
+                <!-- Sub Section 4 -->
+                <record id="tax_report_line_104" model="account.report.line">
+                    <field name="name">4. Supplies of services within the eu</field>
+                    <field name="code">104</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_104_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">I.4_base</field>
+                        </record>
+                    </field>
+                </record>
+                <!-- Sub Section 5 -->
+                <record id="tax_report_line_105" model="account.report.line">
+                    <field
+                            name="name"
+                        >5. Supplies to persons not established in the republic of Croatia</field>
+                    <field name="code">105</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_105_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">I.5_base</field>
+                        </record>
+                    </field>
+                </record>
+                <!-- Sub Section 6 -->
+                <record id="tax_report_line_106" model="account.report.line">
+                    <field
+                            name="name"
+                        >6. Installed and assembled goods in another member state</field>
+                            <field name="code">106</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_106_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">I.6_base</field>
+                        </record>
+                    </field>
+                </record>
+                <!-- Sub Section 7 -->
+                <record id="tax_report_line_107" model="account.report.line">
+                    <field
+                            name="name"
+                        >7. Supplies of new means of transport to another member state</field>
+                    <field name="code">107</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_107_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">I.7_base</field>
+                        </record>
+                    </field>
+                </record>
+                <!-- Sub Section 8 -->
+                <record id="tax_report_line_108" model="account.report.line">
+                    <field name="name">8. Domestic supplies</field>
+                    <field name="code">108</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_108_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">I.8_base</field>
+                        </record>
+                    </field>
+                </record>
+                <!-- Sub Section 9 -->
+                <record id="tax_report_line_109" model="account.report.line">
+                    <field name="name">9. Export deliveries</field>
+                    <field name="code">109</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_109_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">I.9_base</field>
+                        </record>
+                    </field>
+                </record>
+                <!-- Sub Section 10 -->
+                <record id="tax_report_line_110" model="account.report.line">
+                    <field name="name">10. Other exemptions</field>
+                    <field name="code">110</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_110_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">I.10_base</field>
+                        </record>
+                    </field>
+                </record>
+                <!-- Sub Section 11 -->
+                <record id="tax_report_line_111" model="account.report.line">
+                    <field name="name">11. Deliveries with 0% tax</field>
+                    <field name="code">111</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_111_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">I.11_base</field>
+                        </record>
+                    </field>
+                </record>
+            </field>
+        </record>
+        <!-- Section II -->
+        <record id="tax_report_title_200" model="account.report.line">
+            <field name="name">II. Taxable transactions – total amount
+            (1.+2.+3.+4.+5.+6.+7.+8.+9.+10.+11.+12.+13.+14.+15.)</field>
+            <field name="code">200</field>
+            <field name="expression_ids">
+                <record id="tax_report_line_200_base" model="account.report.expression">
+                    <field name="label">osn</field>
+                    <field name="engine">aggregation</field>
+                    <field
+                            name="formula"
+                        >201.osn + 202.osn + 203.osn + 204.osn + 205.osn + 206.osn + 207.osn + 208.osn + 209.osn + 210.osn + 211.osn + 212.osn + 213.osn + 214.osn + 215.osn</field>
+                </record>
+                <record id="tax_report_line_200_tax" model="account.report.expression">
+                    <field name="label">por</field>
+                    <field name="engine">aggregation</field>
+                    <field
+                            name="formula"
+                        >201.por + 202.por + 203.por + 204.por + 205.por + 26.por + 207.por + 208.por + 209.por + 210.por + 211.por + 212.por + 213.por + 214.por + 215.por</field>
+                </record>
+            </field>
+            <field name="children_ids">
+                <!-- Sub Section 1 -->
+                <record id="tax_report_line_201" model="account.report.line">
+                    <field
+                            name="name"
+                        >1. Supplies of goods and services in the republic of Croatia at a rate 5%</field>
+                    <field name="code">201</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_201_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.1_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_201_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.1_tax</field>
+                        </record>
+                    </field>
+                </record>
+                 <!-- Sub Section 2 -->
+                <record id="tax_report_line_202" model="account.report.line">
+                    <field
+                            name="name"
+                        >2. Supplies of goods and services in the republic of Croatia at a rate 13%</field>
+                    <field name="code">202</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_202_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.2_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_202_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.2_tax</field>
+                        </record>
+                    </field>
+                </record>
+                <!-- Sub Section 3 -->
+                <record id="tax_report_line_203" model="account.report.line">
+                    <field
+                            name="name"
+                        >3. Supplies of goods and services in the republic of Croatia at a rate 25%</field>
+                    <field name="code">203</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_203_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.3_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_203_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.3_tax</field>
+                        </record>
+                    </field>
+                </record>
+                <!-- Sub Section 4 -->
+                <record id="tax_report_line_204" model="account.report.line">
+                    <field
+                            name="name"
+                        >4. Supplies received in the republic of Croatia in respect of which the receiver calculates vat (domestic reverse charge)</field>
+                    <field name="code">204</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_204_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.4_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_204_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.4_tax</field>
+                        </record>
+                    </field>
+                </record>
+                <!-- Sub Section 5 -->
+                <record id="tax_report_line_205" model="account.report.line">
+                    <field
+                            name="name"
+                        >5. Acquisition of goods within the eu at a rate 5%</field>
+                    <field name="code">205</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_205_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.5_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_205_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.5_tax</field>
+                        </record>
+                    </field>
+                </record>
+                <!-- Sub Section 6 -->
+                <record id="tax_report_line_206" model="account.report.line">
+                    <field
+                            name="name"
+                        >6. Acquisition of goods within the eu at a rate 13%</field>
+                    <field name="code">206</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_206_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.6_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_206_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.6_tax</field>
+                        </record>
+                    </field>
+                </record>
+                <!-- Sub Section 7 -->
+                <record id="tax_report_line_207" model="account.report.line">
+                    <field
+                            name="name"
+                        >7. Acquisition of goods within the eu at a rate 25%</field>
+                    <field name="code">207</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_207_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.7_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_207_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.7_tax</field>
+                        </record>
+                    </field>
+                </record>
+                <!-- Sub Section 8 -->
+                <record id="tax_report_line_208" model="account.report.line">
+                    <field name="name">8. Services received from eu at a rate 5%</field>
+                    <field name="code">208</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_208_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.8_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_208_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.8_tax</field>
+                        </record>
+                    </field>
+                </record>
+                <!-- Sub Section 9 -->
+                <record id="tax_report_line_209" model="account.report.line">
+                    <field
+                            name="name"
+                        >9. Services received from eu at a rate 13%</field>
+                    <field name="code">209</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_209_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.9_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_209_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.9_tax</field>
+                        </record>
+                    </field>
+                </record>
+                <!-- Sub Section 10 -->
+                <record id="tax_report_line_210" model="account.report.line">
+                    <field
+                            name="name"
+                        >10. Services received from eu at a rate 25%</field>
+                    <field name="code">210</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_210_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.10_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_210_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.10_tax</field>
+                        </record>
+                    </field>
+                </record>
+                <!-- Sub Section 11 -->
+                <record id="tax_report_line_211" model="account.report.line">
+                    <field
+                            name="name"
+                        >11. Supplies of goods and services received from taxable persons not established in the republic of Croatia at a rate 5%</field>
+                    <field name="code">211</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_211_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.11_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_211_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.11_tax</field>
+                        </record>
+                    </field>
+                </record>
+                <!-- Sub Section 12 -->
+                <record id="tax_report_line_212" model="account.report.line">
+                    <field
+                            name="name"
+                        >12. Supplies of goods and services received from taxable persons not established in the republic of Croatia at a rate 13%</field>
+                    <field name="code">212</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_212_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.12_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_212_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.12_tax</field>
+                        </record>
+                    </field>
+                </record>
+                <!-- Sub Section 13 -->
+                <record id="tax_report_line_213" model="account.report.line">
+                    <field
+                            name="name"
+                        >13. Supplies of goods and services received from taxable persons not established in the republic of Croatia at a rate 25%</field>
+                    <field name="code">213</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_213_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.13_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_213_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.13_tax</field>
+                        </record>
+                    </field>
+                </record>
+                <!-- Sub Section 14 -->
+                <record id="tax_report_line_214" model="account.report.line">
+                    <field
+                            name="name"
+                        >14. Subsequent exemption on exportation related to personal  passenger transportation</field>
+                    <field name="code">214</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_214_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.14_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_214_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.14_tax</field>
+                        </record>
+                    </field>
+                </record>
+                <!-- Sub Section 15 -->
+                <record id="tax_report_line_215" model="account.report.line">
+                    <field name="name">15. Vat calculated on importat</field>
+                    <field name="code">215</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_215_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.15_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_215_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">II.15_tax</field>
+                        </record>
+                    </field>
+                </record>
+            </field>
+        </record>
+        <!-- Section III -->
+        <record id="tax_report_title_300" model="account.report.line">
+            <field
+                    name="name"
+                >III. Calculated input vat – total amount (1.+2.+3.+4.+5.+6.+7.+8.+9.+10.+11.+12.+13. +14.+15.)</field>
+            <field name="code">300</field>
+            <field name="expression_ids">
+                <record id="tax_report_line_300_base" model="account.report.expression">
+                    <field name="label">osn</field>
+                    <field name="engine">aggregation</field>
+                    <field
+                            name="formula"
+                        >301.osn + 302.osn + 303.osn + 304.osn + 305.osn + 306.osn + 307.osn + 308.osn + 309.osn + 310.osn + 311.osn + 312.osn + 313.osn + 314.osn + 315.osn</field>
+                </record>
+                <record id="tax_report_line_300_tax" model="account.report.expression">
+                    <field name="label">por</field>
+                    <field name="engine">aggregation</field>
+                    <field
+                            name="formula"
+                        >301.por + 302.por + 303.por + 304.por + 305.por + 306.por + 307.por + 308.por + 309.por + 310.por + 311.por + 312.por + 313.por + 314.por + 315.por</field>
+                </record>
+            </field>
+            <field name="children_ids">
+                <!-- Sub Section 1 -->
+                <record id="tax_report_line_301" model="account.report.line">
+                    <field
+                            name="name"
+                        >1. Input vat related to supplies received in the country at a rate 5%</field>
+                    <field name="code">301</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_301_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">III.1_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_301_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">III.1_tax</field>
+                        </record>
+                    </field>
+                 </record>
+                <!-- Sub Section 2 -->
+                <record id="tax_report_line_302" model="account.report.line">
+                    <field
+                            name="name"
+                        >2. Input vat related to supplies received in the country at a rate 13%</field>
+                    <field name="code">302</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_302_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">III.2_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_302_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">III.2_tax</field>
+                        </record>
+                    </field>
+                 </record>
+                <!-- Sub Section 3 -->
+                <record id="tax_report_line_303" model="account.report.line">
+                    <field
+                            name="name"
+                        >3. Input vat related to supplies received in the country at a rate 25%</field>
+                    <field name="code">303</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_303_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">III.3_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_303_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">III.3_tax</field>
+                        </record>
+                    </field>
+                 </record>
+                <!-- Sub Section 4 -->
+                <record id="tax_report_line_304" model="account.report.line">
+                    <field
+                            name="name"
+                        >4. Input vat related to supplies received in the country in respect of which the receiver calculates vat (domestic reverse charge)</field>
+                    <field name="code">304</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_304_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">III.4_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_304_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">III.4_tax</field>
+                        </record>
+                    </field>
+                 </record>
+                <!-- Sub Section 5 -->
+                <record id="tax_report_line_305" model="account.report.line">
+                    <field
+                            name="name"
+                        >5. Input vat related to acquisition of goods within the eu at a rate 5%</field>
+                    <field name="code">305</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_305_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">III.5_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_305_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">III.5_tax</field>
+                        </record>
+                    </field>
+                 </record>
+                <!-- Sub Section 6 -->
+                <record id="tax_report_line_306" model="account.report.line">
+                    <field
+                            name="name"
+                        >6. Input vat related to acquisition of goods within the eu at a rate 13%</field>
+                    <field name="code">306</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_306_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">III.6_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_306_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">III.6_tax</field>
+                        </record>
+                    </field>
+                 </record>
+                <!-- Sub Section 7 -->
+                <record id="tax_report_line_307" model="account.report.line">
+                    <field
+                            name="name"
+                        >7. Input vat related to acquisition of goods within the eu at a rate 25%</field>
+                    <field name="code">307</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_307_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">III.7_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_307_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">III.7_tax</field>
+                        </record>
+                    </field>
+                 </record>
+                <!-- Sub Section 8 -->
+                <record id="tax_report_line_308" model="account.report.line">
+                    <field
+                            name="name"
+                        >8. Input vat related to services received from eu at a rate 5%</field>
+                    <field name="code">308</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_308_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">III.8_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_308_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">III.8_tax</field>
+                        </record>
+                    </field>
+                 </record>
+                <!-- Sub Section 9 -->
+                <record id="tax_report_line_309" model="account.report.line">
+                    <field
+                            name="name"
+                        >9. Input vat related to services received from eu at a rate 13%</field>
+                    <field name="code">309</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_309_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">III.9_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_309_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">III.9_tax</field>
+                        </record>
+                    </field>
+                 </record>
+                <!-- Sub Section 10 -->
+                <record id="tax_report_line_310" model="account.report.line">
+                    <field
+                            name="name"
+                        >10. Input vat related to services received from eu at a rate 25%</field>
+                    <field name="code">310</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_310_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">III.10_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_310_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                        <field name="formula">III.10_tax</field>
+                        </record>
+                    </field>
+                 </record>
+                <!-- Sub Section 11 -->
+                <record id="tax_report_line_311" model="account.report.line">
+                    <field
+                            name="name"
+                        >11. Input vat related to supplies of goods and services received from non-established taxable persons at a rate 5%</field>
+                    <field name="code">311</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_311_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">III.11_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_311_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                        <field name="formula">III.11_tax</field>
+                        </record>
+                    </field>
+                 </record>
+                <!-- Sub Section 12 -->
+                <record id="tax_report_line_312" model="account.report.line">
+                    <field
+                            name="name"
+                        >12. Input vat related to supplies of goods and services received from non-established taxable persons at a rate 13%</field>
+                    <field name="code">312</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_312_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">III.12_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_312_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                        <field name="formula">III.12_tax</field>
+                        </record>
+                    </field>
+                 </record>
+                <!-- Sub Section 13 -->
+                <record id="tax_report_line_313" model="account.report.line">
+                    <field
+                            name="name"
+                        >13. Input vat related to supplies of goods and services received from non-established taxable persons at a rate 25%</field>
+                    <field name="code">313</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_313_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">III.13_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_313_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                        <field name="formula">III.13_tax</field>
+                        </record>
+                    </field>
+                 </record>
+                <!-- Sub Section 14 -->
+                <record id="tax_report_line_314" model="account.report.line">
+                    <field name="name">14. Input vat related to importation</field>
+                    <field name="code">314</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_314_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">III.14_base</field>
+                        </record>
+                        <record
+                                id="tax_report_line_314_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                        <field name="formula">III.14_tax</field>
+                        </record>
+                    </field>
+                 </record>
+                <!-- Sub Section 15 -->
+                <record id="tax_report_line_315" model="account.report.line">
+                    <field name="name">15. Adjustments of deductions</field>
+                    <field name="code">315</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_315_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">tax_tags</field>
+                        <field name="formula">III.15_tax</field>
+                        </record>
+                    </field>
+                 </record>
+            </field>
+        </record>
+        <!-- Section IV -->
+        <record id="tax_report_title_400" model="account.report.line">
+            <field
+                    name="name"
+                >IV. Vat liability in the calculation period: to pay (ii. - iii.) or to refund (iii. - ii.)</field>
+            <field name="code">400</field>
+            <field name="expression_ids">
+                <record id="tax_report_line_IV_tax" model="account.report.expression">
+                    <field name="label">pdv</field>
+                    <field name="engine">aggregation</field>
+                    <field name="formula">IV_plus.por + IV_minus.por</field>
+                </record>
+            </field>
+            <field name="children_ids">
+                <record id="tax_report_line_IV_plus" model="account.report.line">
+                    <field name="name">1. To pay</field>
+                    <field name="code">IV_plus</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_IV_1_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">aggregation</field>
+                            <field
+                                    name="formula"
+                                >c_II_total.por - c_III_total.por</field>
+                            <field name="subformula">if_above(EUR(0))</field>
+                        </record>
+                    </field>
+                 </record>
+                <record id="tax_report_line_IV_minus" model="account.report.line">
+                    <field name="name">2. To refund</field>
+                    <field name="code">IV_minus</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_IV_2_tax"
+                                model="account.report.expression"
+                            >
+                            <field name="label">por</field>
+                            <field name="engine">aggregation</field>
+                            <field
+                                    name="formula"
+                                >c_III_total.por - c_II_total.por</field>
+                            <field name="subformula">if_above(EUR(0))</field>
+                        </record>
+                    </field>
+                 </record>
+            </field>
+        </record>
+        <!-- Section V -->
+        <record id="tax_report_title_500" model="account.report.line">
+            <field name="name">V. Annual deductible proportion(%)</field>
+        </record>
+        <record id="tax_report_title_600" model="account.report.line">
+            <field name="name">VI. Other data</field>
+        </record>
+        <!-- Section VI -->
+        <record id="tax_report_title_610" model="account.report.line">
+            <field name="name">1. FOR PUCHASE TAX ADJUSTMETS</field>
+            <field name="code">610</field>
+            <field name="expression_ids">
+                <record id="tax_report_line_610_base" model="account.report.expression">
+                    <field name="label">osn</field>
+                    <field name="engine">aggregation</field>
+                    <field
+                            name="formula"
+                        >611.osn + 612.osn + 613.osn + 614.osn + 615.osn</field>
+                </record>
+            </field>
+            <field name="children_ids">
+                <!-- Sub Section 6.1 -->
+                <record id="tax_report_line_611" model="account.report.line">
+                        <field name="name">1.1 Aquisition of realestate</field>
+                        <field name="code">611</field>
+                        <field name="expression_ids">
+                            <record
+                                id="tax_report_line_611_base"
+                                model="account.report.expression"
+                            >
+                                <field name="label">osn</field>
+                                <field name="engine">tax_tags</field>
+                                <field name="formula">VI.11_base</field>
+                            </record>
+                        </field>
+                 </record>
+                <record id="tax_report_line_612" model="account.report.line">
+                    <field
+                            name="name"
+                        >1.2 Aquisition of personal cars and other personal transport means</field>
+                    <field name="code">612</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_612_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">VI.12_base</field>
+                        </record>
+                    </field>
+                </record>
+                <record id="tax_report_line_613" model="account.report.line">
+                    <field
+                            name="name"
+                        >1.3 Sales of personal cars and other personal transport means</field>
+                    <field name="code">613</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_613_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">VI.13_base</field>
+                        </record>
+                    </field>
+                </record>
+                <record id="tax_report_line_614" model="account.report.line">
+                    <field
+                            name="name"
+                        >1.4 Aquisition of other long period assets</field>
+                    <field name="code">614</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_614_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">VI.14_base</field>
+                        </record>
+                    </field>
+                </record>
+                <record id="tax_report_line_615" model="account.report.line">
+                    <field name="name">1.5 Sales of other long period assets</field>
+                    <field name="code">615</field>
+                    <field name="expression_ids">
+                        <record
+                                id="tax_report_line_615_base"
+                                model="account.report.expression"
+                            >
+                            <field name="label">osn</field>
+                            <field name="engine">tax_tags</field>
+                            <field name="formula">VI.15_base</field>
+                        </record>
+                    </field>
+                </record>
+            </field>
+
+        </record>
+        <record id="tax_report_line_620" model="account.report.line">
+            <field
+                    name="name"
+                >2. Dsiposal/Aquisition of business units or power plants</field>
+            <field name="code">620</field>
+            <field name="expression_ids">
+                <record id="tax_report_line_620_base" model="account.report.expression">
+                    <field name="label">osn</field>
+                    <field name="engine">tax_tags</field>
+                    <field name="formula">VI.2_base</field>
+                </record>
+            </field>
+         </record>
+        <record id="tax_report_line_630" model="account.report.line">
+            <field
+                    name="name"
+                >3. Total received services from non resident tax payers (EU + third countries)</field>
+            <field name="code">630</field>
+            <field name="expression_ids">
+                <record id="tax_report_line_630_base" model="account.report.expression">
+                    <field name="label">usl_in</field>
+                    <field name="engine">tax_tags</field>
+                    <field name="formula">VI.3_base</field>
+                </record>
+            </field>
+         </record>
+        <record id="tax_report_line_640" model="account.report.line">
+            <field
+                    name="name"
+                >4. Total services provided to taxpayesr without residece in Croatia (EU + third countries)</field>
+            <field name="code">640</field>
+            <field name="expression_ids">
+                <record id="tax_report_line_640_base" model="account.report.expression">
+                    <field name="label">usl_out</field>
+                    <field name="engine">tax_tags</field>
+                    <field name="formula">III.4_base</field>
+                </record>
+            </field>
+         </record>
+        <record id="tax_report_line_650" model="account.report.line">
+            <field
+                    name="name"
+                >5. received goods from EU within three-way business</field>
+            <field name="code">650</field>
+            <field name="expression_ids">
+                <record id="tax_report_line_650_base" model="account.report.expression">
+                    <field name="label">osn</field>
+                    <field name="engine">tax_tags</field>
+                    <field name="formula">VI.5_base</field>
+                </record>
+            </field>
+         </record>
+    </field>
+</record>
+</odoo>
