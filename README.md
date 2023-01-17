@@ -9,7 +9,20 @@
 
 # l10n-croatia
 
-TODO: add repo description.
+This repository contains basic modules for Croatia localisation.
+
+Important note on instaling CoA modules for this repository: ahen creating the new database
+DO NOT SELECT COUNTRY - If you create a database with country set, and install Invoicing app,
+the first CoA module found for selected country will be installed. That means you will hava
+l10n_hr module form odoo core modules.
+
+Correct procedure steps for using alternative CoA:
+
+- Create new database, without country set on create screen.
+- Install Invoicing app
+- Go to Invoicing settings page, click on : Install additional Chart of accounts,
+  then select desired CoA module.
+- Proceed with usual setup steps.
 
 <!-- /!\ do not modify below this line -->
 
