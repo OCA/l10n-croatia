@@ -48,7 +48,7 @@ repos:
       - id: oca-gen-addon-readme
         args:
           - --addons-dir=.
-          - --branch=16.0
+          - --branch=/6.0
           - --org-name=OCA
           - --repo-name=l10n-croatia
           - --if-source-changed
