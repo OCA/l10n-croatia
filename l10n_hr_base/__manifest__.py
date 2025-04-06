@@ -1,0 +1,21 @@
+{
+    "name": """Croatia - base""",
+    "summary": """Croatia base localization data""",
+    "category": "Croatia",
+    "images": [],
+    "version": "18.0.0.0.0",
+    "application": False,
+    "author": "DAJ MI 5, Odoo Community Association (OCA), adapted for odoo 18 by Andrej Skvorc",
+    "website": "https://github.com/OCA/l10n-croatia",
+    "support": "",
+    "license": "AGPL-3",
+    "depends": ["base"],
+    "external_dependencies": {"python": ["tzlocal"], "bin": []},
+    "data": [
+        "views/res_company_view.xml",
+    ],
+    "qweb": [],
+    "demo": [],
+    "auto_install": False,
+    "installable": True,
+}
